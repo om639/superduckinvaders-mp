@@ -14,8 +14,6 @@ public class OutboundPacketEncoder extends MessageToByteEncoder<OutboundPacket> 
     protected void encode(ChannelHandlerContext ctx, OutboundPacket msg, ByteBuf out) throws Exception {
         ByteBuf payload = msg.getPayload();
 
-        System.out.println("Sending packet w/ opcode " + msg.getOpcode() + " and size " + msg.getPayload().readableBytes() + " bytes");
-
         out.writeByte(msg.getOpcode());
         out.writeBytes(payload);
 

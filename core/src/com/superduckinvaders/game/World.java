@@ -103,7 +103,6 @@ public final class World {
     }
 
     public void updateEntityPosition(int id, double x, double y) {
-        System.out.println("update position for entity " + id);
         Entity entity = entities.get(id);
 
         if (entity != null) {

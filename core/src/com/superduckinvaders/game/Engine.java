@@ -138,8 +138,6 @@ public class Engine {
     private void processStart(ByteBuf payload) {
         int id = payload.readInt();
 
-        System.out.println("hi im " + id);
-
         parent.getWorld().setPlayer(id);
         parent.showGameScreen();
     }
