@@ -146,37 +146,26 @@ public class Assets {
     private static TextureSet loadTextureSet(String path) throws FileNotFoundException {
         FileHandle directory = Gdx.files.internal(path);
 
-        if (!directory.exists() || !directory.isDirectory())
+        if (!directory.exists())
             throw new FileNotFoundException();
 
-        // Check if there is a single texture.
         FileHandle all = directory.child("all.png");
 
         if (all.exists()) {
-            Texture texture = loadTexture(all);
-
-            return new TextureSet(new TextureRegion(texture));
+            return new TextureSet(new TextureRegion(loadTexture(all)));
         } else {
             TextureRegion[] idle = new TextureRegion[4];
             Animation[] anim = new Animation[4];
 
-            for (FileHandle child : directory.list()) {
-                if (child.name().equals("idle.png")) {
-                    // Load the idle texture.
-                    Texture texture = loadTexture(child);
-                    int width = texture.getWidth() / 4;
-                    int height = texture.getHeight();
+            // Load idle texture.
+            Texture idleTexture = loadTexture(directory.child("idle.png"));
+            int width = idleTexture.getWidth() / 4;
+            int height = idleTexture.getHeight();
 
-                    idle[Entity.Direction.DOWN.ordinal()] = new TextureRegion(texture, 0, 0, width, height);
-                    idle[Entity.Direction.UP.ordinal()] = new TextureRegion(texture, width, 0, width, height);
-                    idle[Entity.Direction.LEFT.ordinal()] = new TextureRegion(texture, width * 2, 0, width, height);
-                    idle[Entity.Direction.RIGHT.ordinal()] = new TextureRegion(texture, width * 3, 0, width, height);
-                } else if (child.name().startsWith("anim_")) {
-                    // Load the animation textures.
-                    String name = child.nameWithoutExtension().substring(5);
-
-                    anim[Entity.Direction.forName(name).ordinal()] = loadAnimation(child, TEXTURE_ANIM_FRAMES, TEXTURE_ANIM_DURATION);
-                }
+            // Cut idle texture and load anim textures.
+            for (Entity.Direction direction : Entity.Direction.values()) {
+                idle[direction.ordinal()] = new TextureRegion(idleTexture, width * direction.ordinal(), 0, width, height);
+                anim[direction.ordinal()] = loadAnimation(directory.child("anim_" + direction.getName() + ".png"), TEXTURE_ANIM_FRAMES, TEXTURE_ANIM_DURATION);
             }
 
             return new TextureSet(idle, anim);
