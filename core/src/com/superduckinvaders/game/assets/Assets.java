@@ -223,7 +223,7 @@ public class Assets {
      * @return the animation
      */
     public static Animation loadAnimation(Texture texture, int count, int frameWidth, float frameDuration) {
-        Array<TextureRegion> keyFrames = new Array<>();
+        Array<TextureRegion> keyFrames = new Array<TextureRegion>();
 
         for (int i = 0; i < count; i++) {
             keyFrames.add(new TextureRegion(texture, i * frameWidth, 0, frameWidth, texture.getHeight()));

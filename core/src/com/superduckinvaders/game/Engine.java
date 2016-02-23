@@ -47,12 +47,12 @@ public class Engine {
     /**
      * The queue of inbound packets.
      */
-    private final Queue<InboundPacket> inbound = new ConcurrentLinkedQueue<>();
+    private final Queue<InboundPacket> inbound = new ConcurrentLinkedQueue<InboundPacket>();
 
     /**
      * The queue of outbound packets.
      */
-    private final Queue<OutboundPacket> outbound = new ConcurrentLinkedQueue<>();
+    private final Queue<OutboundPacket> outbound = new ConcurrentLinkedQueue<OutboundPacket>();
 
     public Engine(SuperDuckInvaders parent, String inetHost, int inetPort) {
         this.parent = parent;

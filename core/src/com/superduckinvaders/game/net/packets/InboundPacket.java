@@ -48,7 +48,7 @@ public class InboundPacket {
         /**
          * Maps opcodes to packet types.
          */
-        private static final Map<Integer, Type> opcodes = new HashMap<>();
+        private static final Map<Integer, Type> opcodes = new HashMap<Integer, Type>();
 
         /**
          * Populates the opcode map.
