@@ -47,6 +47,7 @@ project(":core") {
     dependencies {
         compile "com.badlogicgames.gdx:gdx:$gdxVersion"
         compile "com.badlogicgames.gdx:gdx-box2d:$gdxVersion"
+		compile "io.netty:netty-all:4.0.34.Final"
     }
 }
 
